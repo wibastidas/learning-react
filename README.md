@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-<img src="https://github.com/wibastidas/learning-react/blob/master/src/assets/img/capture.png" alt="Screenshot" />
+<img src="https://github.com/wibastidas/learning-react/blob/master/src/assets/img/capture.png" alt="Screenshot" height="700"/>
 
 ## Available Scripts
 
