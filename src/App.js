@@ -1,35 +1,53 @@
-import React, { Component } from 'react';
-//import logo from './assets/img/logo.svg';
-import './styles/App.css';
-import Header from './components/header';
-import Dish from './components/dish';
-import NewDish  from './components/newDish';
-import Button from '@material-ui/core/Button';
+import React, { Component } from "react";
+
+import Header from "./components/header";
+import NewDish from "./components/newDish";
+import Dishes from "./components/dishes";
+
+import data from "./assets/data/dishes.json";
+
+import "./styles/App.css";
 
 class App extends Component {
-  dish = "Tacos"; 
-  dishes = ["Tacos", "Ceviches", " Paella"]
+  state = {
+    dish: "tacos",
+    dishes: data
+  };
 
   showDishes = e => {
     e.preventDefault();
     this.props.history.push("/platillos");
-  }
+  };
+
+  updateDish = (index, updatedName) => {
+    let newState = { ...this.state };
+    newState.dishes.dishes[index].name = updatedName;
+
+    this.setState(newState);
+  };
+
+  addDish = dishName => {
+    let newState = { ...this.state };
+
+    const newDish = {
+      id: newState.dishes.dishes.length,
+      name: dishName,
+      country: "México",
+      ingredients: ["Semillas", "Pollo", "Arroz"]
+    };
+
+    newState.dishes.dishes.push(newDish);
+
+    this.setState(newState);
+  };
 
   render() {
     return (
       <div className="App">
         <Header />
-        <NewDish />
-        {/* <Dish name={this.dish}  /> */}
-        {/* Yo como { this.dish }
-        <ul>
-          {
-            this.dishes.map(dish => <li>{dish}</li>)
-          }
-        </ul> */}
-        <Button variant="contained" color="secondary" onClick={this.showDishes}>
-            Elegir
-        </Button>
+        <NewDish onAddDish={this.addDish} />
+        {/* <Dish name={this.dish} qty="3" /> */}
+        <Dishes data={this.state.dishes} onUpdateDish={this.updateDish} />
       </div>
     );
   }
